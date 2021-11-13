@@ -11,6 +11,6 @@ router.get('/profile', (req,res) => {
 });
 
 app.use('/', router);
-// different port due to other processes on 3000
-app.listen(process.env.port || 3005);
-console.log('Web Server is listening at port '+ (process.env.port || 3005));
+// locally, different port due to other processes on 3000
+app.listen(process.env.PORT || 3005);
+console.log('Web Server is listening at port '+ (process.env.PORT || 3005));
