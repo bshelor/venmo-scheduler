@@ -1,7 +1,7 @@
 require('dotenv').config({ silent: true });
 
 const config = {
-  DATABASE_CONN_DETAILS: process.env.DATABASE_URI
+  LOCAL_DATABASE_URI: process.env.LOCAL_DATABASE_URI
 };
 
 module.exports = config;

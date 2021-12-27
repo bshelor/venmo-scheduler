@@ -19,7 +19,6 @@ router.get('/users', (req, res) => {
     if (error) {
       throw error;
     }
-    console.log('results -- ', results);
     res.send(results.rows);
   })
 });
