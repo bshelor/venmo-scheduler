@@ -9,6 +9,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3002:3005"
+    volumes:
+      - node_modules:/app/node_modules/
+      - ./:/app/ ## anonymous volume so that the files can be watched by nodemon. TODO: figure out why this is needed
 
   postgres:
     build:
@@ -28,3 +31,4 @@ services:
 
 volumes:
   venmo-data:
+  node_modules:

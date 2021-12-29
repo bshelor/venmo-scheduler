@@ -13,8 +13,8 @@ router.get('/profile', (req,res) => {
   res.send('Hello World, This is profile router');
 });
 
-router.get('/users', (req, res) => {
-  // res.send('In progress. working on connecting the database');
+router.get('/usersNow2', (req, res) => {
+  console.log('testing restart Bryson test');
   db.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error;
@@ -28,13 +28,7 @@ router.get('/info', (request, response) => {
 })
 
 app.use('/', router);
-// app.use(bodyParser.json())
-// app.use(
-//   bodyParser.urlencoded({
-//     extended: true,
-//   })
-// )
+
 // locally, different port due to other processes on 3000
 app.listen(process.env.PORT || 3005);
-console.log(app);
 console.log('Web Server is listening at port '+ (process.env.PORT || 3002));
