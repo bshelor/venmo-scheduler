@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
-// const db = require('./config/initializeDb');
-const db = require('./db/config');
+require('./db/initializeDb');
+const UserModel = require('./src/models/UserModel');
+const ScheduleModel = require('./src/models/ScheduleModel');
 
 
 router.get('/home', (req,res) => {
@@ -13,14 +14,19 @@ router.get('/profile', (req,res) => {
   res.send('Hello World, This is profile router');
 });
 
-router.get('/usersNow2', (req, res) => {
-  console.log('testing restart Bryson test');
-  db.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
-    if (error) {
-      throw error;
-    }
-    res.send(results.rows);
-  })
+router.get('/users', (req, res) => {
+  UserModel.query().select()
+    .then(result => {
+      res.send(result);
+    })
+    .catch(err => { throw err; });
+});
+
+router.get('/schedules', (req, res) => {
+  ScheduleModel.query().select()
+    .then(result => {
+      res.send(result);
+    }).catch(err => { throw err; });
 });
 
 router.get('/info', (request, response) => {

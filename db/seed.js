@@ -115,7 +115,6 @@ async.autoInject({
               VALUES('${scheduleOneId}', 'Failed', '2021-12-28 00:00:00', '{"message": "Failed due to token expiration"}');`;
     db.query(query, (error, results) => {
       if (error) {
-        console.log("🚀 ~ file: seed.js ~ line 116 ~ db.query ~ error", error)
         throw error;
       }
 
@@ -123,7 +122,6 @@ async.autoInject({
               VALUES('${scheduleTwoId}', 'Success', '2021-12-27 00:00:00', '{"message": "Successfully paid 2 people"}');`;
       db.query(query, (error, results) => {
         if (error) {
-          console.log("🚀 ~ file: seed.js ~ line 124 ~ db.query ~ error", error)
           throw error;
         }
         cb();
