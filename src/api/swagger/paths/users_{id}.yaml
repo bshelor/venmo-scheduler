@@ -1,0 +1,51 @@
+x-swagger-router-controller: userController
+get:
+  description: Returns User identified by id path parameter
+  operationId: getUserById
+  tags:
+    - users
+  parameters:
+    - name: id
+      in: path
+      description: User id to retrieve
+      required: true
+      type: string
+      format: string
+    # - $ref: "#/parameters/Authorization"
+    # - $ref: "#/parameters/Limit"
+    # - $ref: "#/parameters/Offset"
+    # - $ref: "#/parameters/Search"
+    # - $ref: "#/parameters/Sort"
+    # - name: suppliers
+    #   in: query
+    #   description: filter true or false to get only supplier apps or not
+    #   type: boolean
+    #   format: boolean
+    # - name: includeArchived
+    #   in: query
+    #   description: include archived apps in query result
+    #   type: boolean
+    #   default: false
+  responses:
+    '200':
+      description: Success
+      schema:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+    # '400':
+    #   description: Bad Request
+    #   schema:
+    #     $ref: '#/definitions/ErrorResponse'
+    # '401':
+    #   description: Unauthorized
+    #   schema:
+    #     $ref: '#/definitions/ErrorResponse'
+    # '403':
+    #   description: Forbidden
+    #   schema:
+    #     $ref: '#/definitions/ErrorResponse'
+    # default:
+    #   description: Error
+    #   schema:
+    #     $ref: '#/definitions/ErrorResponse'

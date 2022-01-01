@@ -1,0 +1,9 @@
+properties:
+  id:
+    type: string
+  username:
+    type: string
+  email:
+    type: string
+  phone:
+    type: string

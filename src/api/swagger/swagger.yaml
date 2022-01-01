@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Venmo Scheduler API
+host: 'localhost:3002'
+basePath: /
+tags:
+  - name: users
+    description: user operations
+  - name: venmoUsers
+    description: venmoUser operations
+  - name: schedules
+    description: schedules operations
+  - name: scheduleVenmoUsers
+    description: scheduleVenmoUser operations
+  - name: venmoAccounts
+    description: venmoAccount operations
+  - name: scheduleExecutions
+    description: scheduleExecution operations
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /users:
+    x-swagger-router-controller: userController
+    get:
+      description: Returns List of Users identified by query parameters
+      operationId: getUsers
+      tags:
+        - users
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  '/users/{id}':
+    x-swagger-router-controller: userController
+    get:
+      description: Returns User identified by id path parameter
+      operationId: getUserById
+      tags:
+        - users
+      parameters:
+        - name: id
+          in: path
+          description: User id to retrieve
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+definitions:
+  User:
+    properties:
+      id:
+        type: string
+      username:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string

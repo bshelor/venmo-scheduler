@@ -1,0 +1,42 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Venmo Scheduler API
+# during dev, should point to your local machine
+host: localhost:3002
+# basePath prefixes all resource paths
+basePath: /
+#
+tags:
+  - name: users
+    description: user operations
+  - name: venmoUsers
+    description: venmoUser operations
+  - name: schedules
+    description: schedules operations
+  - name: scheduleVenmoUsers
+    description: scheduleVenmoUser operations
+  - name: venmoAccounts
+    description: venmoAccount operations
+  - name: scheduleExecutions
+    description: scheduleExecution operations
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  $ref: ./paths/index.yaml
+definitions:
+  $ref: ./definitions/index.yaml
+# responses:
+  # $ref: ./responses/index.yaml
+# parameters:
+#   $ref: ./parameters/index.yaml
+# securityDefinitions:
+  # $ref: ./securityDefinitions/index.yaml

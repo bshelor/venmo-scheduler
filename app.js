@@ -1,40 +1,29 @@
 const express = require('express');
 const app = express();
-const router = express.Router();
+const async = require('async');
 require('./db/initializeDb');
-const UserModel = require('./src/models/UserModel');
-const ScheduleModel = require('./src/models/ScheduleModel');
 
+const swaggerUi = require('swagger-tools/middleware/swagger-ui');
+const swaggerMetadata = require('swagger-tools/middleware/swagger-metadata');
+const swaggerRouter = require('swagger-tools/middleware/swagger-router');
+const swaggerValidator = require('swagger-tools/middleware/swagger-validator');
+const swaggerParser = require('swagger-parser');
 
-router.get('/home', (req,res) => {
-  res.send("Hello World");
+console.log('Configuring middleware and generating swagger docs...');
+async.waterfall([
+  cb => swaggerParser.validate('./src/api/swagger/swagger.yaml', cb)
+], (err, api) => {
+  if (err) throw err;
+  
+  app.use(swaggerMetadata(api));
+  app.use(swaggerValidator());
+  const options = {
+    controllers: './src/api/controllers'
+  };
+  app.use(swaggerRouter(options));
+  if (process.env.NODE_ENV === 'development') app.use(swaggerUi(api));
+
+  // locally, different port due to other processes on 3000
+  app.listen(process.env.PORT || 3005);
+  console.log('Web Server is listening at port '+ (process.env.PORT || 3002));
 });
-
-router.get('/profile', (req,res) => {
-  res.send('Hello World, This is profile router');
-});
-
-router.get('/users', (req, res) => {
-  UserModel.query().select()
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => { throw err; });
-});
-
-router.get('/schedules', (req, res) => {
-  ScheduleModel.query().select()
-    .then(result => {
-      res.send(result);
-    }).catch(err => { throw err; });
-});
-
-router.get('/info', (request, response) => {
-  response.json({ info: 'Node.js, Express, and Postgres API' });
-})
-
-app.use('/', router);
-
-// locally, different port due to other processes on 3000
-app.listen(process.env.PORT || 3005);
-console.log('Web Server is listening at port '+ (process.env.PORT || 3002));
