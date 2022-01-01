@@ -6,43 +6,35 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 -- users --
 
-CREATE TABLE users (
+CREATE TABLE "public"."users" (
   "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
   "username" text UNIQUE,
   "email" text,
   "phone" text
 );
 
--- venmo_friends --
+-- venmo_users --
 
-CREATE TABLE "public"."venmo_friends" (
+CREATE TABLE "public"."venmo_users" (
     "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
     "user_id" uuid,
     "username" text,
     CONSTRAINT "venmo_friends_user_id_users" FOREIGN KEY ("user_id") REFERENCES "public"."users" ON DELETE CASCADE
 );
 
--- venmo_credentials --
+-- venmo_accounts --
 
-CREATE TABLE "public"."venmo_credentials" (
+CREATE TABLE "public"."venmo_accounts" (
     "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
     "user_id" uuid,
     "username" text,
     "password" text,
     "access_token" text,
     "active" boolean DEFAULT False,
-    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE
-);
-
--- venmo_account_info --
-
-CREATE TABLE "public"."venmo_account_info" (
-    "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
-    "credentials_id" uuid,
     "external_account_id" text,
     "email" text,
     "phone" text,
-    FOREIGN KEY ("credentials_id") REFERENCES "public"."venmo_credentials"("id") ON DELETE CASCADE
+    FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE
 );
 
 -- schedules --
@@ -54,11 +46,20 @@ CREATE TABLE "public"."schedules" (
     "amount" decimal,
     "recurrence" text,
     "next_occurrence" timestamp,
-    "last_occurrence" timestamp,
-    "start" text,
+    "final_occurrence" timestamp,
+    "first_occurrence" timestamp,
     "num_occurrences" integer,
-    "repeat_days" text,
+    "repeat_days" text[],
     FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE CASCADE
+);
+
+-- schedule_venmo_users many-to-many join table --
+
+CREATE TABLE "public"."schedule_venmo_users" (
+    "venmo_user_id" uuid NOT NULL,
+    "schedule_id" uuid NOT NULL,
+    FOREIGN KEY ("venmo_user_id") REFERENCES "public"."venmo_users"("id") ON DELETE CASCADE,
+    FOREIGN KEY ("schedule_id") REFERENCES "public"."schedules"("id") ON DELETE CASCADE
 );
 
 -- schedule_executions --

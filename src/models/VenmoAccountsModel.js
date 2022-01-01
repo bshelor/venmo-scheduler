@@ -2,9 +2,9 @@
 
 const { Model } = require('objection');
 
-class VenmoFriendsModel extends Model {
+class VenmoCredentialsModel extends Model {
   static get tableName() {
-    return 'venmo_friends';
+    return 'venmo_accounts';
   }
 
   static get relationMappings() {
@@ -12,4 +12,4 @@ class VenmoFriendsModel extends Model {
   }
 }
 
-module.exports = VenmoFriendsModel;
+module.exports = VenmoCredentialsModel;
