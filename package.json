@@ -22,6 +22,7 @@
     "pg": "^8.7.1",
     "pg-native": "^3.0.0",
     "swagger-parser": "^10.0.3",
-    "swagger-tools": "^0.10.4"
+    "swagger-tools": "^0.10.4",
+    "winston": "^3.3.3"
   }
 }

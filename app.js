@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const logger = require('./src/api/helpers/logger');
 const async = require('async');
 require('./db/initializeDb');
 
@@ -9,7 +10,7 @@ const swaggerRouter = require('swagger-tools/middleware/swagger-router');
 const swaggerValidator = require('swagger-tools/middleware/swagger-validator');
 const swaggerParser = require('swagger-parser');
 
-console.log('Configuring middleware and generating swagger docs...');
+logger.info('Configuring middleware and generating swagger docs...');
 async.waterfall([
   cb => swaggerParser.validate('./src/api/swagger/swagger.yaml', cb)
 ], (err, api) => {
@@ -25,5 +26,5 @@ async.waterfall([
 
   // locally, different port due to other processes on 3000
   app.listen(process.env.PORT || 3005);
-  console.log('Web Server is listening at port '+ (process.env.PORT || 3002));
+  logger.info('Web Server is listening at port '+ (process.env.PORT || 3002));
 });

@@ -1,6 +1,8 @@
 'use strict';
 
 require('./initializeDb');
+const logger = require('../src/api/helpers/logger');
+
 const ScheduleExecutionModel = require('../src/models/ScheduleExecutionModel');
 const ScheduleModel = require('../src/models/ScheduleModel');
 const ScheduleVenmoUsersModel = require('../src/models/ScheduleVenmoUsersModel');
@@ -85,10 +87,10 @@ async function main() {
 
 main()
   .then((res) => {
-    console.log('Seeded small amount of demo data into database.');
+    logger.info('Seeded small amount of demo data into database.');
     process.exit(0);
   })
   .catch((err) => {
-    console.log(err);
+    logger.error(err);
     process.exit(1);
   });
