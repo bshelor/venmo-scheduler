@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --inspect=0.0.0.0:9229 -L app.js",
-    "seed": "node db/seed.js"
+    "seed": "node db/seed.js",
+    "generateSwagger": "node src/api/helpers/generateSwagger.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,8 @@
     "nodemon": "^2.0.15",
     "objection": "^3.0.0",
     "pg": "^8.7.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "swagger-parser": "^10.0.3",
+    "swagger-tools": "^0.10.4"
   }
 }
