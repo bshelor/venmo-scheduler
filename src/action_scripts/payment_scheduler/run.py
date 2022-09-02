@@ -60,8 +60,7 @@ def executeSchedules(schedules):
     execSched(row)
 
 def main():
-  print(os.listdir())
-  schedules = fetchSchedules('./action_scripts/payment_scheduler/schedules.csv')
+  schedules = fetchSchedules('./src/action_scripts/payment_scheduler/schedules.csv')
   executeSchedules(schedules)
 
 main()
