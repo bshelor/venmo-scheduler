@@ -21,4 +21,4 @@ jobs:
       - name: Execute run.py
         run: python3 ./action_scripts/run.py
         env:
-          key: ${{ secrets.auth_token }}
+          key: ${{ secrets.TEST_TOKEN }}
