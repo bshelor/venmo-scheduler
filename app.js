@@ -1,14 +1,18 @@
-const express = require('express');
-const app = express();
-const logger = require('./src/api/helpers/logger');
-const async = require('async');
-require('./db/initializeDb');
+'use strict';
 
+const async = require('async');
+const express = require('express');
+const swaggerParser = require('swagger-parser');
 const swaggerUi = require('swagger-tools/middleware/swagger-ui');
 const swaggerMetadata = require('swagger-tools/middleware/swagger-metadata');
 const swaggerRouter = require('swagger-tools/middleware/swagger-router');
 const swaggerValidator = require('swagger-tools/middleware/swagger-validator');
-const swaggerParser = require('swagger-parser');
+
+const { ENV } = require('./config/config');
+require('./db/initializeDb');
+const logger = require('./src/api/helpers/logger');
+
+const app = express();
 
 logger.info('Configuring middleware and generating swagger docs...');
 async.waterfall([
@@ -22,7 +26,7 @@ async.waterfall([
     controllers: './src/api/controllers'
   };
   app.use(swaggerRouter(options));
-  if (process.env.NODE_ENV === 'development') app.use(swaggerUi(api));
+  if (ENV === 'development') app.use(swaggerUi(api));
 
   // locally, different port due to other processes on 3000
   app.listen(process.env.PORT || 3005);

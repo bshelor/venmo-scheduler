@@ -11,7 +11,9 @@ const config = {
   /**
   * Configures logging file for winston logging
   */
-  LOG_FILE: './logs/all-logs.log'
+  LOG_FILE: './logs/all-logs.log',
+
+  ENV: process.env.NODE_ENV
 };
 
 module.exports = config;
