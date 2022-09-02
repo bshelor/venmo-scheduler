@@ -20,6 +20,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Execute run.py
-        run: python3 ./action_scripts/run.py
+        run: python3 ./src/action_scripts/run.py
         env:
           key: ${{ secrets.TEST_TOKEN }}
