@@ -19,6 +19,8 @@ jobs:
           python-version: 3.8 #install the python needed
       - name: install venmo-api package
         run: pip3 install venmo-api --upgrade
+      - name: install pandas
+        run: pip3 install pandas
       - name: Execute run.py
         run: python3 ./src/action_scripts/payment_scheduler/run.py
         env:
