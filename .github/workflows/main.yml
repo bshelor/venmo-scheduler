@@ -3,7 +3,8 @@ name: Monthly Housing Payment
 # Controls when the workflow will run
 on:
   schedule:
-    - cron:  '45 0 1 * *'
+    - cron:  '5 * * * *'
+    # '45 0 1 * *'
 
 jobs:
   make_payments:
