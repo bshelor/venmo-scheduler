@@ -10,7 +10,7 @@ const objection = knex({
   client: 'pg',
   connection: {
     connectionString: process.env.DATABASE_URL || LOCAL_DATABASE_URI,
-    ssl: { rejectUnauthorized: false }
+    ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
   }
 });
 
