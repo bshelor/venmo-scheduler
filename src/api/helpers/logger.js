@@ -4,9 +4,9 @@ const { LOGGING_LEVEL, LOG_FILE } = require('../../../config/config');
 const winston = require('winston');
 const fs = require('fs');
 
-if (!fs.existsSync('../../../logs')) {
-  fs.mkdirSync('../../../logs');
-}
+// if (!fs.existsSync('../../../logs')) {
+//   fs.mkdirSync('../../../logs');
+// }
 
 const logger = new winston.createLogger({
   transports: [
