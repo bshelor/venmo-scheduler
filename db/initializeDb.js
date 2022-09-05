@@ -8,7 +8,10 @@ const { LOCAL_DATABASE_URI } = require('../config/config');
 // setup the objection connection for the main venmo-scheduler database
 const objection = knex({
   client: 'pg',
-  connection: process.env.DATABASE_URL || LOCAL_DATABASE_URI
+  connection: {
+    connectionString: process.env.DATABASE_URL || LOCAL_DATABASE_URI,
+    ssl: { rejectUnauthorized: false }
+  }
 });
 
 Model.knex(objection);
