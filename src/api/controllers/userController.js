@@ -1,12 +1,12 @@
 'use strict';
 
-const UserModel = require('../../models/UserModel');
+const UsersInternalModel = require('../../models/UsersInternalModel');
 
 /**
 * Swagger Controller method for GET /users Endpoint
 */
 async function getUsers(req, res) {
-  const users = await UserModel.query().select();
+  const users = await UsersInternalModel.query().select();
   res.status(200).json(users).end();
 }
 
@@ -15,7 +15,7 @@ async function getUsers(req, res) {
 */
 async function getUserById(req, res) {
   const userId = req.swagger.params.id.value;
-  const user = await UserModel.query().select().where({ id: userId }).first();
+  const user = await UsersInternalModel.query().select().where({ id: userId }).first();
   res.status(200).json(user).end();
 }
 
