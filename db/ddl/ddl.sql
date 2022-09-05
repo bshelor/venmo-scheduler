@@ -1,13 +1,13 @@
 --
--- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+-- Name: pgcrypto; Type: EXTENSION; Schema: heroku_ext; Owner: -
 --
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA heroku_ext;
 
 -- users --
 
-CREATE TABLE "public"."users" (
-  "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."users" (
+  "id" uuid DEFAULT heroku_ext.gen_random_uuid() PRIMARY KEY NOT NULL,
   "username" text UNIQUE,
   "email" text,
   "phone" text
@@ -15,8 +15,8 @@ CREATE TABLE "public"."users" (
 
 -- venmo_users --
 
-CREATE TABLE "public"."venmo_users" (
-    "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."venmo_users" (
+    "id" uuid DEFAULT heroku_ext.gen_random_uuid() PRIMARY KEY NOT NULL,
     "user_id" uuid,
     "username" text,
     CONSTRAINT "venmo_friends_user_id_users" FOREIGN KEY ("user_id") REFERENCES "public"."users" ON DELETE CASCADE
@@ -24,8 +24,8 @@ CREATE TABLE "public"."venmo_users" (
 
 -- venmo_accounts --
 
-CREATE TABLE "public"."venmo_accounts" (
-    "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."venmo_accounts" (
+    "id" uuid DEFAULT heroku_ext.gen_random_uuid() PRIMARY KEY NOT NULL,
     "user_id" uuid,
     "username" text,
     "password" text,
@@ -39,8 +39,8 @@ CREATE TABLE "public"."venmo_accounts" (
 
 -- schedules --
 
-CREATE TABLE "public"."schedules" (
-    "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."schedules" (
+    "id" uuid DEFAULT heroku_ext.gen_random_uuid() PRIMARY KEY NOT NULL,
     "user_id" uuid,
     "type" text,
     "amount" decimal,
@@ -55,7 +55,7 @@ CREATE TABLE "public"."schedules" (
 
 -- schedule_venmo_users many-to-many join table --
 
-CREATE TABLE "public"."schedule_venmo_users" (
+CREATE TABLE IF NOT EXISTS "public"."schedule_venmo_users" (
     "venmo_user_id" uuid NOT NULL,
     "schedule_id" uuid NOT NULL,
     FOREIGN KEY ("venmo_user_id") REFERENCES "public"."venmo_users"("id") ON DELETE CASCADE,
@@ -64,8 +64,8 @@ CREATE TABLE "public"."schedule_venmo_users" (
 
 -- schedule_executions --
 
-CREATE TABLE "public"."schedule_executions" (
-    "id" uuid DEFAULT public.gen_random_uuid() PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."schedule_executions" (
+    "id" uuid DEFAULT heroku_ext.gen_random_uuid() PRIMARY KEY NOT NULL,
     "schedule_id" uuid,
     "status" text,
     "executed_at" timestamp,
