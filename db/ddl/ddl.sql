@@ -13,9 +13,9 @@ CREATE TABLE IF NOT EXISTS "public"."users_internal" (
   "phone" text
 );
 
--- users_venmo --
+-- venmo_users --
 
-CREATE TABLE IF NOT EXISTS "public"."users_venmo" (
+CREATE TABLE IF NOT EXISTS "public"."venmo_users" (
     "id" uuid DEFAULT :SCHEMA.gen_random_uuid() PRIMARY KEY NOT NULL,
     "username"              text,
     "external_id"           uuid
@@ -70,8 +70,8 @@ CREATE TABLE IF NOT EXISTS "public"."schedules" (
 -- transaction_users many-to-many join table --
 
 CREATE TABLE IF NOT EXISTS "public"."transaction_users" (
-    "users_venmo_id"                uuid NOT NULL,
+    "venmo_users_id"                uuid NOT NULL,
     "schedule_definition_id"        uuid NOT NULL,
-    FOREIGN KEY ("users_venmo_id") REFERENCES "public"."users_venmo"("id") ON DELETE CASCADE,
+    FOREIGN KEY ("venmo_users_id") REFERENCES "public"."venmo_users"("id") ON DELETE CASCADE,
     FOREIGN KEY ("schedule_definition_id") REFERENCES "public"."schedule_definitions"("id") ON DELETE CASCADE
 );

@@ -2,9 +2,9 @@
 
 const { Model } = require('objection');
 
-class ScheduleVenmoUsersModel extends Model {
+class TransactionUsersModel extends Model {
   static get tableName() {
-    return 'schedule_venmo_users';
+    return 'transaction_users';
   }
 
   static get relationMappings() {
@@ -12,8 +12,8 @@ class ScheduleVenmoUsersModel extends Model {
   }
 
   static get idColumn() {
-    return ['venmo_user_id', 'schedule_id'];
+    return ['venmo_users_id', 'schedule_definition_id'];
   }
 }
 
-module.exports = ScheduleVenmoUsersModel;
+module.exports = TransactionUsersModel;

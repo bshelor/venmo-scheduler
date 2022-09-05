@@ -2,22 +2,23 @@
 
 const { Model } = require('objection');
 
-class ScheduleExecutionModel extends Model {
+class SchedulesModel extends Model {
   static get tableName() {
-    return 'schedule_executions';
+    return 'schedules';
   }
 
   static get relationMappings() {
     return {};
   }
 
-  static get status() {
+  static get statuses() {
     return {
       SUCCESS: 'Succeeded',
       ERROR: 'Failed',
-      RUNNING: 'Running'
+      RUNNING: 'Running',
+      QUEUED: 'Queued'
     };
   }
 }
 
-module.exports = ScheduleExecutionModel;
+module.exports = SchedulesModel;

@@ -2,7 +2,7 @@
 
 const { Model } = require('objection');
 
-class VenmoFriendsModel extends Model {
+class VenmoUsersModel extends Model {
   static get tableName() {
     return 'venmo_users';
   }
@@ -12,4 +12,4 @@ class VenmoFriendsModel extends Model {
   }
 }
 
-module.exports = VenmoFriendsModel;
+module.exports = VenmoUsersModel;

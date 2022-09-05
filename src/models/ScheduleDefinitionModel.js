@@ -2,9 +2,9 @@
 
 const { Model } = require('objection');
 
-class UserModel extends Model {
+class ScheduleDefinitionModel extends Model {
   static get tableName() {
-    return 'users';
+    return 'schedule_definitions';
   }
 
   static get relationMappings() {
@@ -12,4 +12,4 @@ class UserModel extends Model {
   }
 }
 
-module.exports = UserModel;
+module.exports = ScheduleDefinitionModel;
